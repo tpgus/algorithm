@@ -10,29 +10,65 @@
 수들이 담긴 배열과 숫자가 더해지는 횟수 M, 그리고 K가 주어질 때 큰수의 법칙에 따른 결과를 출력하시오.
 */
 
-function foo(arr,M,K){
+//기본적인 방법
+function foo(arr, M, K) {
 
-    arr.sort((a,b) => a-b);
-  
+    arr.sort((a, b) => a - b);
+
     let count = 0;
     let i = 0;
     let sum = 0;
-    let max = arr[arr.length-1]
-    let second = arr[arr.length-2]
-  
-    while( count < M){
-      sum+=max;
-      i++;
-      count++;
-      if(i===K){
-        sum+=second;
-        i=0;
+    let max = arr[arr.length - 1]
+    let second = arr[arr.length - 2]
+
+    while (count < M) {
+        sum += max;
+        i++;
         count++;
-      }
+        if (i === K) {
+            sum += second;
+            i = 0;
+            count++;
+        }
     }
-  
+
     return sum;
-  }
-  
-  let result = foo([3,4,3,4,3],7,2);
-  console.log(result);
+}
+
+let result = foo([3, 4, 3, 4, 3], 7, 2);
+console.log(result);
+
+/*
+개선된 방법
+아이디어 : 위의 문제는 M이 10,000 이하이므로 기본적인 방법을 통해 문제를 해결해도 상관없지만,
+M의 크기가 100억 이상처럼 커진다면 시간 초과 판정을 받을 수 있다.
+[2,4,5,4,6]라는 배열이 주어지고 M이 8, K가 3이라면 다음과 같이 더했을 때 합을 최대로 구할 수 있다.
+(6+6+6+5) + (6+6+6+5) 즉 반복되는 수열이 있다.
+가장 큰 수와 두 번째로 큰 수가 더해질 때는 특정한 수열형태로 일정하게 반복해서 더해지고 있다.
+위의 예에서는 (6,6,6,5)가 반복된다.
+이때 반복되는 수열의 크기는 (K+1)이 된다.
+또한 M을 (K+1)로 나눈 몫이 수열이 반복되는 횟수이다.
+이때, 가장 큰 수가 등장하는 **횟수는 M/K+1에 K를 곱한 수가 된다.
+또한 M이 K+1로 나누어 떨어지지 않는 경우도 고려해야 한다.
+이때에는 이 나머지 만큼 가장 큰 수가 추가적으로 더해지는 경우이므로
+가장 큰 수가 등장하는 총 횟수는 (M/(K+1)) * K + M % (K+1) 이 된다.
+결과적으로는 위의 식을 이용해 가장 큰 수가 더해지는 횟수를 구한 다음, 이를 이용해 두 번째로 큰 수가 더해지는 횟수까지 구해주면 된다.
+*/
+function foo1(arr, M, K) {
+
+    arr.sort((a, b) => a - b);
+
+    const max = arr[arr.length-1];
+    const secondMax = arr[arr.length-1];
+    
+    let count = 0; //큰 수가 등장하는 횟수를 구하기
+    count += parseInt(M / (K+1) * K) + M % (K+1);
+
+    let sum = 0;
+    sum += count * max;
+    sum += (M - count) * secondMax;
+    return sum;
+}
+
+let result1 = foo1([3, 4, 3, 4, 3], 7, 2);
+console.log(result1);
