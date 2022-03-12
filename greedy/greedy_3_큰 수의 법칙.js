@@ -12,22 +12,22 @@
 
 //기본적인 방법
 function foo(arr, M, K) {
-
+    //가장 큰 수와 그 다음으로 큰 수를 찾기 위해서 정렬부터 수행한다.
     arr.sort((a, b) => a - b);
 
-    let count = 0;
-    let i = 0;
-    let sum = 0;
-    let max = arr[arr.length - 1]
-    let second = arr[arr.length - 2]
+    let count = 0;  //M과 비교를 위한 카운트 변수
+    let i = 0;      //K와 비교하기 위한 카운트 변수
+    let sum = 0;    
+    let max = arr[arr.length - 1]    //가장 큰 수
+    let second = arr[arr.length - 2] //두 번째로 큰 수
 
-    while (count < M) {
-        sum += max;
-        i++;
-        count++;
-        if (i === K) {
-            sum += second;
-            i = 0;
+    while (count < M) {     //매 반복문마다 count는 +1씩 늘어나서 K만큼 돌게 됨.
+        sum += max;         //가장 큰 수를 더해 나감
+        i++;                //가장 큰 수는 K번 만큼만 더할 수 있으므로 나중에 K와 비교하기 위한 카운트 변수 i에 ++
+        count++;            //그리고 최종적으로는 총 M번 만큼 반복문을 돌기 위한 카운트 변수
+        if (i === K) {      //가장 큰 수를 K번 더했다면,
+            sum += second;  //이제는 두 번째로 큰 수를 한 번 더해주어야 함.
+            i = 0;          //그리고 가장 큰 수가 더해진 횟수를 초기화한다.
             count++;
         }
     }
