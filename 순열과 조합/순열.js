@@ -64,6 +64,14 @@ function newChickenRecipe(stuffArr, choiceNum) {
         copy.splice(i,1);         //고정된 값을 뺀다.
         permutate(copy, basket.concat(fixed), n-1); //재귀
       }
+      /*
+      forEach((curr, idx, origin) => {
+        const copy = origin.slice()
+        copy.splice(idx,1);
+        permutate(copy,basket.concat(curr),n-1);
+      })
+      */
+
     }
   
     permutate(stuffArr, [], choiceNum); //첫 실행
