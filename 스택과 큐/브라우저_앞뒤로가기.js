@@ -31,13 +31,13 @@ String 타입의 시작 페이지를 나타내는 현재 접속해 있는 대문
 Array 타입을 리턴해야 합니다.
 
 -주의사항
-만약 start의 인자로 string 자료형이 아닌 다른 자료형이 들어온다면 false를 리턴합니다.
-새로운 페이지 접속은 알파벳 대문자로 표기합니다.
-뒤로 가기 버튼을 누른 행동은 -1로 표기합니다.
-앞으로 가기 버튼을 누른 행동은 1로 표기합니다.
-다음 방문할 페이지는 항상 현재 페이지와 다른 페이지로 접속합니다.
-방문한 페이지의 개수는 100개 이하입니다.
-반환되는 출력값 배열의 첫 번째 요소 prev 스택, 세 번째 요소 next 스택은 배열입니다. 스택을 사용자 정의한다면 출력에서는 배열로 변환해야 합니다.
+1.만약 start의 인자로 string 자료형이 아닌 다른 자료형이 들어온다면 false를 리턴합니다.
+2.새로운 페이지 접속은 알파벳 대문자로 표기합니다.
+3.뒤로 가기 버튼을 누른 행동은 -1로 표기합니다.
+4.앞으로 가기 버튼을 누른 행동은 1로 표기합니다.
+5.다음 방문할 페이지는 항상 현재 페이지와 다른 페이지로 접속합니다.
+6.방문한 페이지의 개수는 100개 이하입니다.
+7.반환되는 출력값 배열의 첫 번째 요소 prev 스택, 세 번째 요소 next 스택은 배열입니다. 스택을 사용자 정의한다면 출력에서는 배열로 변환해야 합니다.
 
 -예시
 const actions = ["B", "C", -1, "D", "A", -1, 1, -1, -1];
@@ -48,32 +48,32 @@ console.log(output); // [["A"], "B", ["A", "D"]]
 */
 
 function browserStack(actions, start) {
-    let prev = [];
-    let next = [];
-    let current = start;
+    let prev = [];                    // 이전 페이지들을 담을 스택 (뒤로가기)
+    let next = [];                    // 다음 페이지들을 담을 스택 (앞으로가기)
+    let current = start;              // 현재
   
-    if(typeof current !== 'string'){
+    if(typeof current !== 'string'){  //주의사항 1번에 해당하는 코드
       return false;
     }
   
     for(let i of actions){
-       if(typeof i === 'string'){
-        //새로운 페이지
-        prev.push(current);
-        next = [];
-        current = i;
+       if(typeof i === 'string'){     //새로운 페이지에 접속할 경우
+        prev.push(current);           //현재 페이지를 이전 페이지 스택에 넣고
+        next = [];                    //새로운 페이지니까 다음 페이지 스택은 비워지게 된다. (앞으로 가기 불가)
+        current = i;                  //현재 페이지를 다시 설정
       }else{
-        //뒤,앞으로 가기
-        if( i > 0 && next.length > 0){
-          prev.push(current);
-          current = next.pop();
-        }else if(i<0 && prev.length > 0){
+                                      //앞으로 가기 로직
+        if( i > 0 && next.length > 0){//i가 1이면 앞으로 가기, 앞으로 가기 스택이 비워있지 않다면?
+          prev.push(current);         //이전 페이지 스택에 현재 페이지를 넣고
+          current = next.pop();       //현재 페이지는 앞으로 가기 스택에서 가져온다.
+
+        }else if(i<0 && prev.length > 0){ //위와 반대 (뒤로 가기 로직)
           next.push(current);
           current = prev.pop();
         }
       }
     }
-    return [prev,current,next];
+    return [prev,current,next];     //[[이전 페이지 스택], 현재 페이지, [다음 페이지 스택]]
   
   }
   
