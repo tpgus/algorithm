@@ -61,7 +61,7 @@ function foo(curr, map) {
             nowY += mvY;
             count++;
             key = 0; // 핵심 (이동 한 뒤, 다시 모든 방향을 살펴보기 위해, key를 0으로 설정 반복문이 처음부터 다시 시작)
-        }
+        }            // 이동할 수 있다면, 계속 이동하면서 반복문이 초기화 된다.
     }
     return count;
 }
