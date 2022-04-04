@@ -47,3 +47,24 @@ const binarySearch = function (arr, target) {
     }
     return -1;                                     //찾지 못했다면 -1 출력
 };
+
+const recursiveBinarySearch = function (arr, target, left, right) {
+
+    if (left > right) { // 탈출 조건
+        return -1;
+    }
+
+    let middle = parseInt((left + right) / 2);
+    if (arr[middle] === target) {
+        return middle;
+    } else if (arr[middle] < target) {
+        return recursiveBinarySearch(arr, target, middle + 1, right);
+    } else {
+        return recursiveBinarySearch(arr, target, left, middle - 1);
+    }
+}
+
+let arr = [1, 2, 3, 4, 5, 6, 8, 10, 20, 15];
+arr.sort((a, b) => a - b);
+let result = recursiveBinarySearch(arr, 6, 0, arr.length - 1);
+console.log(result);
