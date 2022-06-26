@@ -22,27 +22,29 @@
 */
 
 function foo(N, plan) {
+  const dir = {
+    //방향에 따라 현재 좌표값에 더해줄 룩업테이블
+    U: [-1, 0], //참고로 배열과 실제 수학에서 사용하는 x,y의 좌표는 반대임
+    D: [1, 0],
+    R: [0, 1],
+    L: [0, -1],
+  };
 
-    const dir = {              //방향에 따라 현재 좌표값에 더해줄 룩업테이블
-        U: [-1, 0],            //참고로 배열과 실제 수학에서 사용하는 x,y의 좌표는 반대임
-        D: [1, 0],             
-        R: [0, 1],
-        L: [0, -1]
+  let x = 1;
+  let y = 1;
+  for (let i of plan) {
+    //계획서의 값들을 모두 순회하는 반복문
+    const [mvY, mvX] = dir[i]; //방향에 따라 룩업 테이블에서 값을 가져와서 현재 좌표에 더한다.
+    x += mvX;
+    y += mvY;
+
+    if (x < 1 || x > N || y < 1 || y > N) {
+      //엣지 케이스 검사
+      x -= mvX;
+      y -= mvY;
     }
-
-    let x = 1;
-    let y = 1;
-    for (let i of plan) {          //계획서의 값들을 모두 순회하는 반복문
-        const [mvY, mvX] = dir[i]; //방향에 따라 룩업 테이블에서 값을 가져와서 현재 좌표에 더한다. 
-        x += mvX;
-        y += mvY;
-
-        if (x < 1 || x > N || y < 1 || y > N) { //엣지 케이스 검사
-            x -= mvX;
-            y -= mvY;
-        }
-    }
-    return [y, x];  //실제 수학에서의 2차원상 좌표와 배열의 좌표는 x,y가 반대이다.
+  }
+  return [y, x]; //실제 수학에서의 2차원상 좌표와 배열의 좌표는 x,y가 반대이다.
 }
-let result = foo(5, ['R', 'R', 'R', 'U', 'D', 'D']);
+let result = foo(5, ["R", "R", "R", "U", "D", "D"]);
 console.log(result);

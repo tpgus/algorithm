@@ -6,22 +6,22 @@ FIFO : 먼저 들어간 데이터가 먼저 나온다.
 */
 
 class Queue {
-    constructor() {
-        this.storage = {}; //값 보관하는 저장소
-        this.front = 0;    //큐의 가장 앞을 가리키기 위한 변수
-        this.rear = 0;     //큐의 가장 뒤를 가리키기 위한 변수
-    }
+  constructor() {
+    this.storage = {}; //값 보관하는 저장소
+    this.front = 0; //큐의 가장 앞을 가리키기 위한 변수
+    this.rear = 0; //큐의 가장 뒤를 가리키기 위한 변수
+  }
 
-    //큐의 사이즈를 반환하는 메소드
-    size() {
-        return this.rear - this.front;
-    }
+  //큐의 사이즈를 반환하는 메소드
+  size() {
+    return this.rear - this.front;
+  }
 
-    //큐에 데이터를 추가하는 메소드
-    enqueue(element) {
-        this.storage[this.rear] = element;
-        this.rear += 1;
-    }
+  //큐에 데이터를 추가하는 메소드
+  enqueue(element) {
+    this.storage[this.rear] = element;
+    this.rear += 1;
+  }
 
   // queue에서 element를 제거 한 뒤 해당 element를 반환하는 로직.
   // 만약 size가 0이라면 아무 일도 일어나지 않는다.

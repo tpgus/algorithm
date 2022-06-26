@@ -40,31 +40,29 @@ console.log(output1);
 */
 
 function newChickenRecipe(stuffArr, choiceNum) {
+  //상한재료의 끝은 000으로 끝나므로 나머지 연산자를 이용해 상한재료가 아닌 재료들만 뽑는다.
+  stuffArr = stuffArr.filter((item) => item % 1000 !== 0);
 
-    //상한재료의 끝은 000으로 끝나므로 나머지 연산자를 이용해 상한재료가 아닌 재료들만 뽑는다.
-    stuffArr = stuffArr.filter(item => item % 1000 !== 0);
-  
-    //엣지 케이스
-    if(stuffArr.length === 0){
-      return [];
+  //엣지 케이스
+  if (stuffArr.length === 0) {
+    return [];
+  }
+  //레시피가 담길 배열
+  let result = [];
+  //순열을 구하는 재귀 함수
+  const permutate = (arr, basket, n) => {
+    if (n === 0) {
+      result.push(basket);
+      return;
     }
-    //레시피가 담길 배열
-    let result = [];
-    //순열을 구하는 재귀 함수
-    const permutate = (arr, basket, n) => {
-  
-      if( n === 0){
-        result.push(basket);
-        return;
-      }
-  
-      for(let i=0; i<arr.length; i++){
-        const fixed = arr[i];     //값 하나를 고정하고
-        const copy = arr.slice(); //슬라이스한다. (원본을 건들지 않기 위해)
-        copy.splice(i,1);         //고정된 값을 뺀다.
-        permutate(copy, basket.concat(fixed), n-1); //재귀
-      }
-      /*
+
+    for (let i = 0; i < arr.length; i++) {
+      const fixed = arr[i]; //값 하나를 고정하고
+      const copy = arr.slice(); //슬라이스한다. (원본을 건들지 않기 위해)
+      copy.splice(i, 1); //고정된 값을 뺀다.
+      permutate(copy, basket.concat(fixed), n - 1); //재귀
+    }
+    /*
       forEach((curr, idx, origin) => {
         const copy = origin.slice()
         copy.splice(idx,1);
@@ -85,9 +83,8 @@ function newChickenRecipe(stuffArr, choiceNum) {
       즉 이미 뽑혔으면 slice(index+1)를 이용해 그 다음 인덱스부터의 배열을 복사해서
       함수를 호출하며 전달해야 함
       */
-     
-    }
-  
-    permutate(stuffArr, [], choiceNum); //첫 실행
-    return result;
-  }
+  };
+
+  permutate(stuffArr, [], choiceNum); //첫 실행
+  return result;
+}

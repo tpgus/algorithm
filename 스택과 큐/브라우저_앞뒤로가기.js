@@ -48,32 +48,33 @@ console.log(output); // [["A"], "B", ["A", "D"]]
 */
 
 function browserStack(actions, start) {
-    let prev = [];                    // 이전 페이지들을 담을 스택 (뒤로가기)
-    let next = [];                    // 다음 페이지들을 담을 스택 (앞으로가기)
-    let current = start;              // 현재
-  
-    if(typeof current !== 'string'){  //주의사항 1번에 해당하는 코드
-      return false;
-    }
-  
-    for(let i of actions){
-       if(typeof i === 'string'){     //새로운 페이지에 접속할 경우
-        prev.push(current);           //현재 페이지를 이전 페이지 스택에 넣고
-        next = [];                    //새로운 페이지니까 다음 페이지 스택은 비워지게 된다. (앞으로 가기 불가)
-        current = i;                  //현재 페이지를 다시 설정
-      }else{
-                                      //앞으로 가기 로직
-        if( i > 0 && next.length > 0){//i가 1이면 앞으로 가기, 앞으로 가기 스택이 비워있지 않다면?
-          prev.push(current);         //이전 페이지 스택에 현재 페이지를 넣고
-          current = next.pop();       //현재 페이지는 앞으로 가기 스택에서 가져온다.
+  let prev = []; // 이전 페이지들을 담을 스택 (뒤로가기)
+  let next = []; // 다음 페이지들을 담을 스택 (앞으로가기)
+  let current = start; // 현재
 
-        }else if(i<0 && prev.length > 0){ //위와 반대 (뒤로 가기 로직)
-          next.push(current);
-          current = prev.pop();
-        }
+  if (typeof current !== "string") {
+    //주의사항 1번에 해당하는 코드
+    return false;
+  }
+
+  for (let i of actions) {
+    if (typeof i === "string") {
+      //새로운 페이지에 접속할 경우
+      prev.push(current); //현재 페이지를 이전 페이지 스택에 넣고
+      next = []; //새로운 페이지니까 다음 페이지 스택은 비워지게 된다. (앞으로 가기 불가)
+      current = i; //현재 페이지를 다시 설정
+    } else {
+      //앞으로 가기 로직
+      if (i > 0 && next.length > 0) {
+        //i가 1이면 앞으로 가기, 앞으로 가기 스택이 비워있지 않다면?
+        prev.push(current); //이전 페이지 스택에 현재 페이지를 넣고
+        current = next.pop(); //현재 페이지는 앞으로 가기 스택에서 가져온다.
+      } else if (i < 0 && prev.length > 0) {
+        //위와 반대 (뒤로 가기 로직)
+        next.push(current);
+        current = prev.pop();
       }
     }
-    return [prev,current,next];     //[[이전 페이지 스택], 현재 페이지, [다음 페이지 스택]]
-  
   }
-  
+  return [prev, current, next]; //[[이전 페이지 스택], 현재 페이지, [다음 페이지 스택]]
+}

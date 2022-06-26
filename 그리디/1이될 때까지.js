@@ -19,17 +19,17 @@ N이 1이 될 때까지 1번 또는 2번 과정을 수행해야 하는 횟수의
 */
 
 function foo(N, K) {
-    let count = 0;
+  let count = 0;
 
-    while (N > 1) {
-        if (N % K === 0) {
-            N /= K
-        }else{
-            N -= 1;
-        }
-        count ++;
+  while (N > 1) {
+    if (N % K === 0) {
+      N /= K;
+    } else {
+      N -= 1;
     }
-    return count;
+    count++;
+  }
+  return count;
 }
 
 let result = foo(25, 5);

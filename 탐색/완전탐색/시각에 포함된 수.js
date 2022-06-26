@@ -32,24 +32,22 @@
 */
 
 function foo(N) {
+  let result = 0;
 
-    let result = 0;
-
-    for (let i = 0; i <= N; i++) {
-        i = i.toString();
-        for (let j = 0; j < 60; j++) {
-            j = j.toString();
-            for (let k = 0; k < 60; k++) {
-                let str = i + j + k.toString();
-                if(str.indexOf('3')!==-1){
-                    result++;
-                }
-            }
+  for (let i = 0; i <= N; i++) {
+    i = i.toString();
+    for (let j = 0; j < 60; j++) {
+      j = j.toString();
+      for (let k = 0; k < 60; k++) {
+        let str = i + j + k.toString();
+        if (str.indexOf("3") !== -1) {
+          result++;
         }
+      }
     }
-    return result;
+  }
+  return result;
 }
-
 
 const result = foo(5);
 console.log(result);

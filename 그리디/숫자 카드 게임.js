@@ -27,23 +27,22 @@
 1.각 행마다 가장 작은 숫자를 찾는다.
 2.이렇게 뽑아낸 숫자들 중에서 가장 큰 수를 찾아낸다.
 */
-function foo(matrix){
+function foo(matrix) {
+  let max = 0; //가장 큰 수를 찾기 위한 max 변수
 
-    let max = 0; //가장 큰 수를 찾기 위한 max 변수
-    
-    for(let i=0; i<matrix.length; i++){
-        let min = Math.min(...matrix[i]); //각 행마다 가장 작은 수를 구한다.
-        if(min > max){                    
-            max = min;
-        }
+  for (let i = 0; i < matrix.length; i++) {
+    let min = Math.min(...matrix[i]); //각 행마다 가장 작은 수를 구한다.
+    if (min > max) {
+      max = min;
     }
-    return max;
+  }
+  return max;
 }
 
 let matrix = [
-    [3,1,2],
-    [4,1,4],
-    [2,2,2]
-]
+  [3, 1, 2],
+  [4, 1, 4],
+  [2, 2, 2],
+];
 let result = foo(matrix);
 console.log(result);

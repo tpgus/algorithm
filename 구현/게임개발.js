@@ -42,38 +42,39 @@
 */
 
 function foo(curr, map) {
-    const mv = { //룩업 테이블 (핵심)
-        '0': [0, -1],
-        '1': [1, 0],
-        '2': [0, 1],
-        '3': [-1, 0]
-    }
+  const mv = {
+    //룩업 테이블 (핵심)
+    0: [0, -1],
+    1: [1, 0],
+    2: [0, 1],
+    3: [-1, 0],
+  };
 
-    let count = 1;
-    let nowX = curr[0];
-    let nowY = curr[1];
+  let count = 1;
+  let nowX = curr[0];
+  let nowY = curr[1];
 
-    for (let key = 0; key < 4; key++) {
-        let [mvY, mvX] = mv[key];
-        if (map[nowY + mvY][nowX + mvX] !== 1) { //이동 했을 때 그 좌표의 값이 1이 아니라면, 이동할 수 있다.
-            map[nowY][nowX] = 1;                 //1이라면 아무 동작없이 반복문만 다음 단계로 진행
-            nowX += mvX;
-            nowY += mvY;
-            count++;
-            key = 0; // 핵심 (이동 한 뒤, 다시 모든 방향을 살펴보기 위해, key를 0으로 설정 반복문이 처음부터 다시 시작)
-        }            // 이동할 수 있다면, 계속 이동하면서 반복문이 초기화 된다.
-    }
-    return count;
+  for (let key = 0; key < 4; key++) {
+    let [mvY, mvX] = mv[key];
+    if (map[nowY + mvY][nowX + mvX] !== 1) {
+      //이동 했을 때 그 좌표의 값이 1이 아니라면, 이동할 수 있다.
+      map[nowY][nowX] = 1; //1이라면 아무 동작없이 반복문만 다음 단계로 진행
+      nowX += mvX;
+      nowY += mvY;
+      count++;
+      key = 0; // 핵심 (이동 한 뒤, 다시 모든 방향을 살펴보기 위해, key를 0으로 설정 반복문이 처음부터 다시 시작)
+    } // 이동할 수 있다면, 계속 이동하면서 반복문이 초기화 된다.
+  }
+  return count;
 }
-
 
 const curr = [1, 1, 1];
 const map = [
-    [1, 1, 1, 1,1],
-    [1, 0, 0, 1,1],
-    [1, 1, 1, 0,1],
-    [1, 1, 1, 1,1],
-    [1, 1, 1, 1,1]
-]
+  [1, 1, 1, 1, 1],
+  [1, 0, 0, 1, 1],
+  [1, 1, 1, 0, 1],
+  [1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1],
+];
 const result = foo(curr, map);
 console.log(result);

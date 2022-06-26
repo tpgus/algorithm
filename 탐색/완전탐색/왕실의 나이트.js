@@ -26,32 +26,42 @@ a1의 위치는 좌표 평면의 왼쪽 상단 구석에 해당하며 기사는 
 */
 
 function foo(current) {
+  let nowX = current[0].charCodeAt() - 97; //좌표가 'a1'처럼 주어진다. 첫 번째 문자를 숫자형으로 바꾸기 위해 아스키코드를 이용했다. (a:97 ~ h:104)
+  let nowY = Number(current[1]) - 1; //나중에 배열의 인덱스로 사용하기 위해 -1을 해주었다.
 
-    let nowX = current[0].charCodeAt() - 97; //좌표가 'a1'처럼 주어진다. 첫 번째 문자를 숫자형으로 바꾸기 위해 아스키코드를 이용했다. (a:97 ~ h:104)
-    let nowY = Number(current[1]) - 1;       //나중에 배열의 인덱스로 사용하기 위해 -1을 해주었다.
+  const allXY = [
+    [2, -1],
+    [2, 1],
+    [-2, 1],
+    [-2, -1],
+    [1, 2],
+    [-1, 2],
+    [1, -2],
+    [-1, -2],
+  ]; //8가지 움직임에 대해 좌표가 변화되는 양?수치?값?
 
-    const allXY = [[2,-1],[2,1],[-2,1],[-2,-1],[1,2],[-1,2],[1,-2],[-1,-2]]; //8가지 움직임에 대해 좌표가 변화되는 양?수치?값?
+  let count = 0;
+  for (let i of allXY) {
+    //8번을 반복
+    let y = nowY; //현재 좌표를 반복문 마다 다시 사용해야 하므로, 아예 새로운 변수에 현재 좌표를 할당해놓고 쓴다.
+    let x = nowX;
 
-    let count = 0;
-    for(let i of allXY){ //8번을 반복
-        let y = nowY;    //현재 좌표를 반복문 마다 다시 사용해야 하므로, 아예 새로운 변수에 현재 좌표를 할당해놓고 쓴다.
-        let x = nowX;
+    y += i[0]; //현재 좌표에 더한다.
+    x += i[1];
 
-        y += i[0];      //현재 좌표에 더한다.
-        x += i[1];
-
-        if(isNotValid(y, x)){ //유효성 검사
-            continue;
-        }
-
-        count++;
+    if (isNotValid(y, x)) {
+      //유효성 검사
+      continue;
     }
-    return count;
+
+    count++;
+  }
+  return count;
 }
 
-function isNotValid(nowY, nowX){
-    return nowY < 0 || nowY  > 7 || nowX < 0 || nowX > 7; // ||는 앞이 참이면 뒤를 검사하지 않고 참이므로, nowY >= 0 || nowY < 8 이런식으로 검사하면 안 된다.
+function isNotValid(nowY, nowX) {
+  return nowY < 0 || nowY > 7 || nowX < 0 || nowX > 7; // ||는 앞이 참이면 뒤를 검사하지 않고 참이므로, nowY >= 0 || nowY < 8 이런식으로 검사하면 안 된다.
 }
 
-const result = foo('a1');
+const result = foo("a1");
 console.log(result);

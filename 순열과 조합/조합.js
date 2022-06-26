@@ -29,40 +29,45 @@ console.log(output); // 1
 3. 이 합들을 가지고 소수를 판별한다.
 */
 function boringBlackjack(cards) {
-    let result = [];
-  
-    //조합을 구하는 함수이자 재귀 함수
-    function combination(arr, basket, n) {
-      if (n === 0) {
-        result.push(basket);
-        return;
-      }
-  
-      arr.forEach((curr, idx, origin) => {
-        combination(origin.slice(idx+1),basket.concat(curr),n-1);
-      })
-    }
-    //시작
-    combination(cards, [], 3);
+  let result = [];
 
-    //결과는 이런식으로 나온다. [[1,2,4],[1,2,5],[1,2,6], ...]
-    //위의 결과를 가지고 모든 경우의 합을 구한다. [[7],[8],[9],[7]....]
-    result = result.map(item => item.reduce((acc, curr) => { return acc + curr }), 0);
-  
-    //아래의 코드부터 소수의 개수를 구하는 로직
-    let count = 0;
-    for (let i of result) {
-      let isPrime = true;
-      for (let j = 2; j <= Math.floor(Math.sqrt(i)); j++) {
-        if (i % j === 0) {
-          isPrime = false;
-        }
-      }
-      if (isPrime) {
-        count++;
+  //조합을 구하는 함수이자 재귀 함수
+  function combination(arr, basket, n) {
+    if (n === 0) {
+      result.push(basket);
+      return;
+    }
+
+    arr.forEach((curr, idx, origin) => {
+      combination(origin.slice(idx + 1), basket.concat(curr), n - 1);
+    });
+  }
+  //시작
+  combination(cards, [], 3);
+
+  //결과는 이런식으로 나온다. [[1,2,4],[1,2,5],[1,2,6], ...]
+  //위의 결과를 가지고 모든 경우의 합을 구한다. [[7],[8],[9],[7]....]
+  result = result.map(
+    (item) =>
+      item.reduce((acc, curr) => {
+        return acc + curr;
+      }),
+    0
+  );
+
+  //아래의 코드부터 소수의 개수를 구하는 로직
+  let count = 0;
+  for (let i of result) {
+    let isPrime = true;
+    for (let j = 2; j <= Math.floor(Math.sqrt(i)); j++) {
+      if (i % j === 0) {
+        isPrime = false;
       }
     }
-  
-    return count;
+    if (isPrime) {
+      count++;
+    }
   }
-  
+
+  return count;
+}

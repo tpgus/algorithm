@@ -36,23 +36,24 @@ idx가 -1일 때, 나갈 수 있는 인원을 어떻게 표현할 것인가?에 
 */
 
 function paveBox(boxes) {
-    //입력이 최소 1 이상이니까 처음부터 최대값은 1로 설정
-    let maxCount = 1;
-  
-    while (boxes.length > 0) { 
-      let pivot = boxes[0];                             //기준을 배열의 첫 번째 요소로 잡아두고
-      let idx = boxes.findIndex(item => item > pivot);  //기준보다 큰 값의 인덱스를 찾는다.
-  
-      if(idx === -1){       //만약 [5, 4, 3] 또는 [5]의 경우처럼 첫 번째 요소보다 큰 값이 없다면, idx를 배열의 길이로 둔다.
-        idx = boxes.length;
-      }
-      if(maxCount < idx){   //그리고 기존의 max값과 비교해서 크다면 max값 변경
-        maxCount = idx;
-      }
-  
-      boxes.splice(0,idx);  //while문의 조건에 따라 boxes의 길이는 계속 변화해야 한다.
-                            //즉 큐에서 값들을 dequeue해 나가면서, 배열을 나머지 값들로만 이루어지게 한다.
-    }
-    return maxCount;
-  }
+  //입력이 최소 1 이상이니까 처음부터 최대값은 1로 설정
+  let maxCount = 1;
 
+  while (boxes.length > 0) {
+    let pivot = boxes[0]; //기준을 배열의 첫 번째 요소로 잡아두고
+    let idx = boxes.findIndex((item) => item > pivot); //기준보다 큰 값의 인덱스를 찾는다.
+
+    if (idx === -1) {
+      //만약 [5, 4, 3] 또는 [5]의 경우처럼 첫 번째 요소보다 큰 값이 없다면, idx를 배열의 길이로 둔다.
+      idx = boxes.length;
+    }
+    if (maxCount < idx) {
+      //그리고 기존의 max값과 비교해서 크다면 max값 변경
+      maxCount = idx;
+    }
+
+    boxes.splice(0, idx); //while문의 조건에 따라 boxes의 길이는 계속 변화해야 한다.
+    //즉 큐에서 값들을 dequeue해 나가면서, 배열을 나머지 값들로만 이루어지게 한다.
+  }
+  return maxCount;
+}

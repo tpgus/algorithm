@@ -29,40 +29,41 @@ left의 값을 middle + 1로 바꿔주고 이 구간에서 다시 탐색을 수�
 재귀적으로 구현하는 방법도 있고, 반복문을 통해 구현할 수도 있다.
 */
 
-
 const binarySearch = function (arr, target) {
-    let left = 0;                   //초기설정, left = 배열의 첫 인덱스
-    let right = arr.length - 1;     //         right = 배열의 마지막 인덱스 
+  let left = 0; //초기설정, left = 배열의 첫 인덱스
+  let right = arr.length - 1; //         right = 배열의 마지막 인덱스
 
-    while (left <= right) {
-        let middle = parseInt((right + left) / 2); //middle은 중간 값
-        if (arr[middle] === target) {              //찾고자 하는 값이 middle과 같다면 출력
-            return middle;
-        }
-        if (target < arr[middle]) {                //위에서 찾지 못했다면, 여기서 비교
-            right = middle - 1;                    //찾고자 하는 값이  middle 보다 작다면,
-        } else {
-            left = middle + 1;                     //찾고자 하는 값이 middle 보다 크다면
-        }
+  while (left <= right) {
+    let middle = parseInt((right + left) / 2); //middle은 중간 값
+    if (arr[middle] === target) {
+      //찾고자 하는 값이 middle과 같다면 출력
+      return middle;
     }
-    return -1;                                     //찾지 못했다면 -1 출력
+    if (target < arr[middle]) {
+      //위에서 찾지 못했다면, 여기서 비교
+      right = middle - 1; //찾고자 하는 값이  middle 보다 작다면,
+    } else {
+      left = middle + 1; //찾고자 하는 값이 middle 보다 크다면
+    }
+  }
+  return -1; //찾지 못했다면 -1 출력
 };
 
 const recursiveBinarySearch = function (arr, target, left, right) {
+  if (left > right) {
+    // 탈출 조건
+    return -1;
+  }
 
-    if (left > right) { // 탈출 조건
-        return -1;
-    }
-
-    let middle = parseInt((left + right) / 2);
-    if (arr[middle] === target) {
-        return middle;
-    } else if (arr[middle] < target) {
-        return recursiveBinarySearch(arr, target, middle + 1, right);
-    } else {
-        return recursiveBinarySearch(arr, target, left, middle - 1);
-    }
-}
+  let middle = parseInt((left + right) / 2);
+  if (arr[middle] === target) {
+    return middle;
+  } else if (arr[middle] < target) {
+    return recursiveBinarySearch(arr, target, middle + 1, right);
+  } else {
+    return recursiveBinarySearch(arr, target, left, middle - 1);
+  }
+};
 
 let arr = [1, 2, 3, 4, 5, 6, 8, 10, 20, 15];
 arr.sort((a, b) => a - b);

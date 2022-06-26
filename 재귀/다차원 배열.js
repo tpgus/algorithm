@@ -21,20 +21,21 @@ output = flattenArr([[2, [[3]]], 4, [[[5]]]);
 console.log(output); // --> [2, 3, 4, 5]
 */
 
-
 function flattenArr(arr) {
-    if (arr.length === 0) { //재귀 탈출 조건
-        return []
+  if (arr.length === 0) {
+    //재귀 탈출 조건
+    return [];
+  }
+  //결과 값을 담을 배열
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    //현재 배열의 길이 만큼 반복 수행
+    if (Array.isArray(arr[i])) {
+      //현재 요소가 배열이라면 ?  다시 재귀 함수 호출
+      result = result.concat(flattenArr(arr[i]));
+    } else {
+      result.push(arr[i]); //현재 요소가 배열이 아니라면 ? result에 추가
     }
-                                                             //결과 값을 담을 배열
-    let result = [];    
-    for (let i = 0; i < arr.length; i++) {                   //현재 배열의 길이 만큼 반복 수행
-        if (Array.isArray(arr[i])) {                         //현재 요소가 배열이라면 ?  다시 재귀 함수 호출
-            result = result.concat(flattenArr(arr[i]))       
-        } 
-        else {                                             
-            result.push(arr[i]);                             //현재 요소가 배열이 아니라면 ? result에 추가
-        }
-    }
-    return result;
+  }
+  return result;
 }

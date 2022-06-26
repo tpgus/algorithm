@@ -5,14 +5,14 @@
 */
 
 function partTimeJob(k) {
-    let count = 0;
-    //동전의 큰 단위부터 배열에 담는다
-    const money = [500, 100, 50, 10, 5, 1];
-  
-    for(let i of money){         //사실 for문으로 하면 무조건 동전의 종류만큼 반복문을 수행해야하는 단점이 있다. (while문으로 가능)
-      count += parseInt( k / i); // 해당 동전으로 거슬러 줄 수 있는 동전의 개수
-      k = k % i;                 // 거슬러 준 후 나머지 금액
-    }
-    return count;
+  let count = 0;
+  //동전의 큰 단위부터 배열에 담는다
+  const money = [500, 100, 50, 10, 5, 1];
+
+  for (let i of money) {
+    //사실 for문으로 하면 무조건 동전의 종류만큼 반복문을 수행해야하는 단점이 있다. (while문으로 가능)
+    count += parseInt(k / i); // 해당 동전으로 거슬러 줄 수 있는 동전의 개수
+    k = k % i; // 거슬러 준 후 나머지 금액
   }
-  
+  return count;
+}

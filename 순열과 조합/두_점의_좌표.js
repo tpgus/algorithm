@@ -42,7 +42,6 @@ function calculateDistance(p1, p2) {
 주어진 좌표들을 가지고 2가지를 선택해서 얻을 수 있는 조합을 이용해 모든 경우를 구한다.
 */
 const closestPairOfPoints = function (points) {
-
   let result = [];
   const combination = (arr, basket, n) => {
     if (n === 0) {
@@ -51,16 +50,16 @@ const closestPairOfPoints = function (points) {
     }
 
     arr.forEach((curr, idx, origin) => {
-      combination(origin.slice(idx + 1), [...basket,curr], n - 1);
-    })
-  }
+      combination(origin.slice(idx + 1), [...basket, curr], n - 1);
+    });
+  };
   combination(points, [], 2);
   console.log(result);
-  result = result.map(item => {
-    return calculateDistance(item[0],item[1]);
-  })
-  result =Math.min(...result);
-  return Math.floor(result*100);
+  result = result.map((item) => {
+    return calculateDistance(item[0], item[1]);
+  });
+  result = Math.min(...result);
+  return Math.floor(result * 100);
 };
 const points = [
   [0, 2],

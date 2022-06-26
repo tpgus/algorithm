@@ -38,33 +38,35 @@ Number 타입을 요소로 갖는 문서 크기가 나열된 배열
 */
 
 function queuePrinter(bufferSize, capacities, documents) {
-    let count = 0;
-    let queue = [];
-    let totalBufferVolume = 0;
+  let count = 0;
+  let queue = [];
+  let totalBufferVolume = 0;
 
-    for (let i = 0; i < bufferSize; i++) {     // queue에 bufferSize만큼 0을 삽입한다.
-        queue.push(0);
-    }                                        // Line 48 ~ 52은 프린터가 처음 실행될 때의 로직
-    let currentDocument = documents.shift(); // documents 배열에서 제일 앞의 있는 요소를 하나 빼내 현재 문서에 할당한다.
-    queue.unshift(currentDocument);          // 큐의 제일 앞에 현재 문서를 삽입하고, 제일 마지막 요소를 없앤다.
-    queue.pop();
-    totalBufferVolume = totalBufferVolume + currentDocument;// 총 용량에 현재 문서의 크기를 합친다.
-    count++;                                 // 1초가 지나면 count++
+  for (let i = 0; i < bufferSize; i++) {
+    // queue에 bufferSize만큼 0을 삽입한다.
+    queue.push(0);
+  } // Line 48 ~ 52은 프린터가 처음 실행될 때의 로직
+  let currentDocument = documents.shift(); // documents 배열에서 제일 앞의 있는 요소를 하나 빼내 현재 문서에 할당한다.
+  queue.unshift(currentDocument); // 큐의 제일 앞에 현재 문서를 삽입하고, 제일 마지막 요소를 없앤다.
+  queue.pop();
+  totalBufferVolume = totalBufferVolume + currentDocument; // 총 용량에 현재 문서의 크기를 합친다.
+  count++; // 1초가 지나면 count++
 
-    while (totalBufferVolume) {               // 총 용량이 0이 될 때까지 반복
-        totalBufferVolume = totalBufferVolume - queue.pop(); //총 용량에 queue에 있는 마지막 요소를 제거한다.
-        currentDocument = documents.shift();   // documents 배열에서 제일 앞의 있는 요소를 하나 빼내 현재 문서에 할당한다.
+  while (totalBufferVolume) {
+    // 총 용량이 0이 될 때까지 반복
+    totalBufferVolume = totalBufferVolume - queue.pop(); //총 용량에 queue에 있는 마지막 요소를 제거한다.
+    currentDocument = documents.shift(); // documents 배열에서 제일 앞의 있는 요소를 하나 빼내 현재 문서에 할당한다.
 
-
-        if (currentDocument + totalBufferVolume <= capacities) { // 만약 현재 문서와 총 용량을 더했을 때, 최대 용량보다 작거나 같다면
-            queue.unshift(currentDocument);                      // 큐에 현재 문서를 삽입하고 총 용량에 현재 문서의 용량을 추가한다.
-            totalBufferVolume = totalBufferVolume + currentDocument;
-
-        } else {                                                 // 만약 현재 문서와 총 용량을 더했을 때, 최대 용량보다 크다면
-            documents.unshift(currentDocument);                  // 다시 documents에 현재 문서를 집어넣고 큐에는 0을 삽입한다.
-            queue.unshift(0);
-        }
-        count++;                                                 // 한 번 반복할 때마다 count++ 1초를 센다. 
+    if (currentDocument + totalBufferVolume <= capacities) {
+      // 만약 현재 문서와 총 용량을 더했을 때, 최대 용량보다 작거나 같다면
+      queue.unshift(currentDocument); // 큐에 현재 문서를 삽입하고 총 용량에 현재 문서의 용량을 추가한다.
+      totalBufferVolume = totalBufferVolume + currentDocument;
+    } else {
+      // 만약 현재 문서와 총 용량을 더했을 때, 최대 용량보다 크다면
+      documents.unshift(currentDocument); // 다시 documents에 현재 문서를 집어넣고 큐에는 0을 삽입한다.
+      queue.unshift(0);
     }
-    return count;
+    count++; // 한 번 반복할 때마다 count++ 1초를 센다.
+  }
+  return count;
 }

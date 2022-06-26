@@ -17,22 +17,22 @@ Number 타입의 40 이상 240 이하의 자연수
 
 //신경써야 하는 것 : 한 번에 최대 2개, 무게 제한
 function movingStuff(stuff, limit) {
-    // TODO: 여기에 코드를 작성합니다.
-    let count = 0;
-    stuff.sort( (a,b) => a-b); // 정렬 
-    let left = 0; 
-    let right = stuff.length - 1;
+  // TODO: 여기에 코드를 작성합니다.
+  let count = 0;
+  stuff.sort((a, b) => a - b); // 정렬
+  let left = 0;
+  let right = stuff.length - 1;
 
-    while(left <= right){
-      //현재 짐 중에 가장 작은 것과 가장 큰 것의 무게의 합이 무게 제한 보다 작다면 둘 다 빼기,
-      if(stuff[left] + stuff[right] <= limit){
-        left++;
-        right--;
-      }else{
-     // 무게 제한을 초과 한다면, 큰 것만 빼기
-        right--;
-      }
-      count++;
+  while (left <= right) {
+    //현재 짐 중에 가장 작은 것과 가장 큰 것의 무게의 합이 무게 제한 보다 작다면 둘 다 빼기,
+    if (stuff[left] + stuff[right] <= limit) {
+      left++;
+      right--;
+    } else {
+      // 무게 제한을 초과 한다면, 큰 것만 빼기
+      right--;
     }
-    return count;
+    count++;
   }
+  return count;
+}
