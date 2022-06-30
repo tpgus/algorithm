@@ -10,27 +10,28 @@ sameFrequency(3589578,5879385) // true
 sameFrequency(22,222) // false
 */
 
-function sameFrequency(...args) {
-  // good luck. Add any arguments you deem necessary.
+function sameFrequency1(...args) {
   let num1 = args[0].toString();
   let num2 = args[1].toString();
 
   let obj1 = {}; // 각 숫자를 키로, 빈도수를 값으로 갖는 객체
   let obj2 = {};
   for (let i of num1) {
-    if (!obj1[i]) {
-      obj1[i] = 0;
-    }
-    obj1[i]++;
+    // if (!obj1[i]) {
+    //   obj1[i] = 0;
+    // }
+    // obj1[i]++;
+    obj1[i] ? (obj1[i] += 1) : (obj1[i] = 1);
   }
 
   for (let i of num2) {
-    if (!obj2[i]) {
-      obj2[i] = 0;
-    }
-    obj2[i]++;
+    // if (!obj2[i]) {
+    //   obj2[i] = 0;
+    // }
+    // obj2[i]++;
+    obj2[i] ? (obj2[i] += 1) : (obj2[i] = 1);
   }
-
+  console.log(obj1, obj2);
   for (let i in obj1) {
     if (obj1[i] !== obj2[i]) {
       return false;
@@ -39,4 +40,26 @@ function sameFrequency(...args) {
   return true;
 }
 
-console.log(sameFrequency(2222221, 22221));
+function sameFrequency2(...args) {
+  let num1 = args[0].toString();
+  let num2 = args[1].toString();
+
+  if (num1.length !== num2.length) {
+    return false;
+  }
+
+  let obj = {};
+  for (let i of num1) {
+    obj[i] = (obj[i] || 0) + 1;
+  }
+
+  for (let i of num2) {
+    if (!obj[i]) {
+      return false;
+    }
+    obj[i]--;
+  }
+  return true;
+}
+
+console.log(sameFrequency2(001, 011));

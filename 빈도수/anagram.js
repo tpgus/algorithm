@@ -6,8 +6,9 @@ ex) iceman은 cinema의 아나그램이다
 */
 
 // Solution 1
+// Time : O(N)
+// Space : O(N)
 function validAnagram(first, second) {
-  //애초에 두 문자열의 길이가 서로 다르다면, 조건을 만족하지 못한다.
   if (first.length !== second.length) {
     return false;
   }
@@ -31,6 +32,8 @@ function validAnagram(first, second) {
 }
 
 // Solution 2
+// Time : O(N)
+// Space : O(2N) = O(N)
 function validAnagram2(word1, word2) {
   if (word1.length !== word2.length) {
     return false;

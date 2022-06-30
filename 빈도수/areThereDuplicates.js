@@ -6,7 +6,7 @@
 // Solution 1
 // Time : O(N)
 // Space : O(N)
-function areThereDuplicates(...args) {
+function areThereDuplicates1(...args) {
   const obj = {};
   for (let i of args) {
     if (!obj[i]) {
@@ -21,9 +21,23 @@ function areThereDuplicates(...args) {
 // Solution 2 : Multiple Pointer
 // Time : O(NlogN)
 // Space : O(1)
+function areThereDuplicates2(...args) {
+  args.sort((a, b) => a - b); // 여기여기여기여ㅣ겨ㅣ여ㅣ기 문자열이 왜 정렬이 안 됨?
+  console.log(args);
+  let start = 0;
+  let next = 1;
+  while (next < args.length) {
+    if (args[start] === args[next]) {
+      return true;
+    }
+    start++;
+    next++;
+  }
+  return false;
+}
 
 /*
-배열이나 문자열 같은 선형구조에 좋음
+배열이나 문자열 같은 선형구조에 좋음 -> 정렬되어 있어야 하나?
 한 쌍의 값이나 조건을 충족시키는 값을 찾는 데 좋다.
 두 개의 포인터를 사용한다.
 1. 왼쪽 끝에서 시작하는 포인터1 오른쪽 끝에서 시작하는 포인터2가 서로 중간 방향으로 이동하면서 검사
@@ -31,6 +45,6 @@ function areThereDuplicates(...args) {
 즉, 두 개의 포인터가 서로를 향해 이동하거나 같은 방향으로 이동한다.
 */
 
-areThereDuplicates(1, 2, 3); //false
-areThereDuplicates(1, 2, 2); //true;
-areThereDuplicates("a", "b", "c", "a"); // true
+console.log(areThereDuplicates2(1, 4, 3, 3));
+console.log(areThereDuplicates2(1, 2, 2));
+console.log(areThereDuplicates2("a", "b", "c", "a"));
