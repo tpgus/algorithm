@@ -22,6 +22,6 @@ function isSubsequence(str1, str2) {
   return false;
 }
 
-console.log(isSubsequence("hello", "hello world")); //true;
-console.log(isSubsequence("sing", "sttaaing")); //true;
-console.log(isSubsequence("abc", "acb")); //false : 순서;
+console.log(isSubsequence("hello", "hello world")); //true
+console.log(isSubsequence("sing", "sttaaing")); //true
+console.log(isSubsequence("abc", "acb")); //false : 순서
