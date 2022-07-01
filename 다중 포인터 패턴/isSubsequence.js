@@ -7,6 +7,8 @@ Time : O(N)
 Space: O(1)
 */
 
+//다른 다중 포인터 문제들과 비교 (입력 값 차이 and 정렬 필요성)
+
 function isSubsequence(str1, str2) {
   let i = 0;
   for (let j of str2) {
@@ -19,3 +21,7 @@ function isSubsequence(str1, str2) {
   }
   return false;
 }
+
+console.log(isSubsequence("hello", "hello world")); //true;
+console.log(isSubsequence("sing", "sttaaing")); //true;
+console.log(isSubsequence("abc", "acb")); //false : 순서;
