@@ -19,7 +19,7 @@ function areThereDuplicates1(...args) {
 }
 
 // Solution 2 : Multiple Pointer
-// Time : O(N)
+// Time : O(N log N) // 브라우저에 따라 다르지만 보통 n log n
 // Space : O(1)
 function areThereDuplicates2(...args) {
   args.sort((a, b) => a - b); // 여기여기여기여ㅣ겨ㅣ여ㅣ기 문자열이 왜 정렬이 안 됨?

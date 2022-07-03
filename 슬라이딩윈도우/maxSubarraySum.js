@@ -47,13 +47,16 @@ function maxSubarraySum2(arr, n) {
   for (let i = n; i < arr.length; i++) {
     sum = sum - arr[i - n] + arr[i];
     maxSum = Math.max(maxSum, sum);
+    //Math.max()는 선형시간 복잡도를 가지지만, 인수가 2개일 때에는 상수시간 복잡도를 가진다.
+    //폴리필
+    //https://github.com/v8/v8/blob/cd81dd6d740ff82a1abbc68615e8769bd467f91e/src/js/math.js#L105-L129
   }
 
   return maxSum;
 }
 
 console.log(maxSubarraySum2([1, 2, 5, 2, 8, 1, 5], 2));
-console.log(maxSubarraySum2([1, 2, 5, 2, 8, 1, 5], 4));
+console.log(maxSubarraySum2([1, 2, 5, 2, 8, 1, 5, 13], 4));
 console.log(maxSubarraySum2([4, 2, 1, 6], 1));
 console.log(maxSubarraySum2([4, 2, 1, 6, 2], 4));
 console.log(maxSubarraySum2([], 4));
