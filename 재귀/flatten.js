@@ -28,7 +28,8 @@ function flatten2(arr) {
 
   for (let i = 0; i < arr.length; i++) {
     if (Array.isArray(arr[i])) {
-      result = result.concat(flatten2(arr[i]));
+      return result.concat(flatten2(arr[i]));
+      //위와 같다. result = result.concat(flatten2(arr[i]));
     } else {
       result.push(arr[i]);
     }
@@ -36,6 +37,6 @@ function flatten2(arr) {
   return result;
 }
 
-console.log(flatten2([1, 2, 3, [4, 5]])); // [1,2,3,4,5]
-console.log(flatten2([[1], [2], [3]])); // [1,2,3]
-console.log(flatten2([1, 2, 3, [4, 5, [6, 7]]])); // [1,2,3,4,5,6,7]
+console.log(flatten1([1, 2, 3, [4, 5]])); // [1,2,3,4,5]
+console.log(flatten1([[1], [2], [3]])); // [1,2,3]
+console.log(flatten1([1, 2, 3, [4, 5, [6, 7]]])); // [1,2,3,4,5,6,7]
