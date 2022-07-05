@@ -22,7 +22,7 @@ function areThereDuplicates1(...args) {
 // Time : O(N log N) // 브라우저에 따라 다르지만 보통 N * logN (최선일때 O(N))
 // Space : O(N)
 function areThereDuplicates2(...args) {
-  args.sort((a, b) => a - b); // 문자열 정렬일 때는 arr.sort();
+  args.sort((a, b) => a - b); // 문자열 정렬일 때는 arr.sort()
   let start = 0;
   let next = 1;
   while (next < args.length) {
