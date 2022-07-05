@@ -4,10 +4,10 @@
 */
 
 function callback(val) {
-  if (val % 2 !== 0) {
-    return true;
-  } else {
+  if (val % 2 === 0) {
     return false;
+  } else {
+    return true;
   }
 }
 
