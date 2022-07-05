@@ -18,4 +18,4 @@ function capitalizeFirst1(arr) {
   return result;
 }
 
-console.log(capitalizeFirst1(["car", "too", "banana"]));
+console.log(capitalizeFirst1(["car", "too", "banana"])); //["Car","Too","Banana"]
