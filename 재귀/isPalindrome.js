@@ -19,10 +19,9 @@ function isPalindrome1(str) {
   return false;
 }
 
-// console.log(isPalindrome1("abbdsa"));
+// console.log(isPalindrome1("abbdsa")); //false
 
 //Solution  2
-
 function isPalindrome2(str) {
   if (str[0] !== str[str.length - 1]) {
     return false;
@@ -33,4 +32,5 @@ function isPalindrome2(str) {
   return isPalindrome2(str.substring(1, str.length - 1));
 }
 
-console.log(isPalindrome2("daadsadd"));
+console.log(isPalindrome2("daadsadd")); //false
+console.log(isPalindrome2("abcba")); //true
