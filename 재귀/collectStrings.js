@@ -9,6 +9,7 @@ const obj = {
     val: {
       thing: {
         info: "bar",
+        test: "foobar",
         moreInfo: {
           evenMoreInfo: {
             weMadeIt: "baz",
