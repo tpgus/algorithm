@@ -6,9 +6,10 @@ function isPalindrome1(str) {
   let result = "";
 
   (function helper(newStr) {
-    if (newStr.length === 0) {
-      return "";
+    if (newStr.length <= 1) {
+      return newStr;
     }
+
     result += newStr[newStr.length - 1];
     helper(newStr.slice(0, newStr.length - 1));
   })(str);
@@ -16,6 +17,7 @@ function isPalindrome1(str) {
   if (result === str) {
     return true;
   }
+
   return false;
 }
 
