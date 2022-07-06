@@ -25,7 +25,7 @@ function collectStrings1(obj) {
   let result = [];
   for (let i in obj) {
     if (typeof obj[i] === "object" && !Array.isArray(obj[i])) {
-      return result.concat(collectStrings(obj[i]));
+      return result.concat(collectStrings1(obj[i]));
     }
     if (typeof obj[i] === "string") {
       result.push(obj[i]);
@@ -51,4 +51,4 @@ function collectStrings2(obj) {
   helper(obj);
   return result;
 }
-console.log(collectStrings2(obj)); //['foo','bar','baz']
+console.log(collectStrings1(obj)); //['foo','bar','baz']
