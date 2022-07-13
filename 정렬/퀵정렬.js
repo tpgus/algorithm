@@ -14,4 +14,13 @@ function pivot(arr, start = 0, end = arr.length - 1) {
   return swapIdx;
 }
 
-console.log(pivot([5, 4, 2, 6, 7, 1]));
+function quickSort(arr, left = 0, right = arr.length - 1) {
+  if (left < right) {
+    let pivotIdx = pivot(arr, left, right);
+    quickSort(arr, left, pivotIdx - 1); //left
+    quickSort(arr, pivotIdx + 1, right); //right
+  }
+  return arr;
+}
+
+console.log(quickSort([6, 5, 2, 4, 3, 1]));
