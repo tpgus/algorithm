@@ -23,6 +23,7 @@ function selectionSort2(arr) {
   for (let i = 0; i < arr.length; i++) {
     let minIdx = i;
     for (let j = i + 1; j < arr.length; j++) {
+      //이미 i를 최솟 값의 인덱스라고 설정했기 때문에 그 다음 요소부터 시작
       if (arr[minIdx] > arr[j]) {
         minIdx = j;
       }
