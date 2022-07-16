@@ -1,4 +1,5 @@
 function merge(arr1, arr2) {
+  //[2,4] , [1,3];
   let result = [];
   let i = 0;
   let j = 0;
@@ -33,6 +34,6 @@ function mergeSort(arr) {
 
   let half = Math.floor(arr.length / 2);
   let left = mergeSort(arr.slice(0, half));
-  let right = mergeSort(arr.slice(halr));
+  let right = mergeSort(arr.slice(half));
   return merge(left, right);
 }

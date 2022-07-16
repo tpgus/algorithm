@@ -15,7 +15,7 @@ function swap(arr, i, j) {
   [arr[i], arr[j]] = [arr[j], arr[i]];
 }
 
-//pivot 함수 case 1
+//pivot 함수 case 1g
 function pivot1(arr, start = 0, end = arr.length - 1) {
   let pivotIdx = start; //마지막에 피벗이 위치할 인덱스를 보관하기 위함. 또한 피벗보다 작은 값이 얼마나 많은지 갯수를 세는 카운터이기도 함.
   let pivotVal = arr[start];
