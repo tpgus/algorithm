@@ -15,18 +15,17 @@ function swap(arr, i, j) {
   [arr[i], arr[j]] = [arr[j], arr[i]];
 }
 
-//pivot 함수 case 1g
+//pivot 함수 case 1
 function pivot1(arr, start = 0, end = arr.length - 1) {
-  let pivotIdx = start; //마지막에 피벗이 위치할 인덱스를 보관하기 위함. 또한 피벗보다 작은 값이 얼마나 많은지 갯수를 세는 카운터이기도 함.
+  let pivotIdx = start;
+  //마지막에 피벗이 위치할 인덱스를 보관하기 위함. 또한 피벗보다 작은 값이 얼마나 많은지 갯수를 세는 카운터이기도 함.
   let pivotVal = arr[start];
 
-  for (let i = start + 1; i < arr.length; i++) {
+  for (let i = start + 1; i <= end; i++) {
     //첫 번째 항목을 스스로 비교할 필요가 없으니 시작점 이후의 값을 설정한다.
     if (pivotVal > arr[i]) {
       pivotIdx++;
-      let temp = arr[i];
-      arr[i] = arr[pivotIdx];
-      arr[pivotIdx] = temp;
+      swap(arr, pivotIdx, i);
     }
   }
   //피벗 값이 있는 시작 인덱스와 피벗 값이 올바른 위치를 나타내는 pivotIdx의 값을 교환한다.
@@ -60,13 +59,17 @@ function pivot2(arr, start = 0, end = arr.length - 1) {
 function quickSort(arr, left = 0, right = arr.length - 1) {
   if (left < right) {
     // 시작과 끝이 같다는 건, 배열의 길이가 1이하라는 것
-    let pivotIdx = pivot2(arr, left, right);
+    // 병합 정렬은 재귀로 들어오는 arr이 항상 다르기 때문에 arr.length <= 1 이라는 조건을 통해 검사가 가능하지만
+    // 퀵 정렬은 항상 원본 배열(같은 배열)에 대해서 작업한다.
+    // 퀵 정렬에서 바뀌는 것은 왼쪽 시작 범위를 나타내는 left, 오른쪽 끝 범위를 나타내는 right 포인터이다.
+    // 재귀를 거듭할 수록 범위는 작아지며 left, right 또한 서로 가까워지게 된다.
+    let pivotIdx = pivot1(arr, left, right);
     quickSort(arr, left, pivotIdx - 1); //left
     quickSort(arr, pivotIdx + 1, right); //right
   }
   return arr;
 }
-// 모든 과정이 새로운 배열이 만들지 않고 기존 배열에 대해 수행한다. 추가적인
+// 모든 과정이 새로운 배열이 만들지 않고 기존 배열에 대해 수행한다.
 // 즉 베이스 케이스는 단순히 전달된 `새로운` 배열의 길이를 통해 요소가 한 개 이하가 있는지 확인하는 것이 아니라,
 // 원본 배열의 하위 배열의 길이를 확인하는 것이다.
 // 따라서 재귀를 호출할 때 하위 배열을 나타내는 시작 인덱스와 끝 인덱스가 다르다.
