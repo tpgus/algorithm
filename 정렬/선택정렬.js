@@ -28,11 +28,11 @@ function selectionSort2(arr) {
         minIdx = j;
       }
     }
-    if (minIdx !== i) {
-      let temp = arr[minIdx];
-      arr[minIdx] = arr[i];
-      arr[i] = temp; //[1,4,3,3,5];
-    }
+    // if (minIdx !== i) {
+    let temp = arr[minIdx];
+    arr[minIdx] = arr[i];
+    arr[i] = temp; //[1,2,4,2,5];
+    // }
   }
   return arr;
 }
