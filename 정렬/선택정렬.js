@@ -20,7 +20,7 @@ function selectionSort1(arr) {
 //버블 정렬은 매 반복마다 값의 교환이 일어난다.
 //선택 정렬은 반복의 마지막에 값의 교환이 일어난다.
 function selectionSort2(arr) {
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length - 1; i++) {
     let minIdx = i;
     for (let j = i + 1; j < arr.length; j++) {
       //이미 i를 최솟 값의 인덱스라고 설정했기 때문에 그 다음 요소부터 시작
@@ -31,7 +31,7 @@ function selectionSort2(arr) {
     if (minIdx !== i) {
       let temp = arr[minIdx];
       arr[minIdx] = arr[i];
-      arr[i] = temp;
+      arr[i] = temp; //[1,4,3,3,5];
     }
   }
   return arr;
