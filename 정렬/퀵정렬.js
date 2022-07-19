@@ -57,16 +57,17 @@ function pivot2(arr, start = 0, end = arr.length - 1) {
 }
 
 function quickSort(arr, left = 0, right = arr.length - 1) {
-  if (left < right) {
-    // 시작과 끝이 같다는 건, 배열의 길이가 1이하라는 것
-    // 병합 정렬은 재귀로 들어오는 arr이 항상 다르기 때문에 arr.length <= 1 이라는 조건을 통해 검사가 가능하지만
-    // 퀵 정렬은 항상 원본 배열(같은 배열)에 대해서 작업한다.
-    // 퀵 정렬에서 바뀌는 것은 왼쪽 시작 범위를 나타내는 left, 오른쪽 끝 범위를 나타내는 right 포인터이다.
-    // 재귀를 거듭할 수록 범위는 작아지며 left, right 또한 서로 가까워지게 된다.
-    let pivotIdx = pivot1(arr, left, right);
-    quickSort(arr, left, pivotIdx - 1); //left
-    quickSort(arr, pivotIdx + 1, right); //right
+  if (left >= right) {
+    return;
   }
+  // 시작과 끝이 같다는 건, 배열의 길이가 1이하라는 것
+  // 병합 정렬은 재귀로 들어오는 arr이 항상 다르기 때문에 arr.length <= 1 이라는 조건을 통해 검사가 가능하지만
+  // 퀵 정렬은 항상 원본 배열(같은 배열)에 대해서 작업한다.
+  // 퀵 정렬에서 바뀌는 것은 왼쪽 시작 범위를 나타내는 left, 오른쪽 끝 범위를 나타내는 right 포인터이다.
+  // 재귀를 거듭할 수록 범위는 작아지며 left, right 또한 서로 가까워지게 된다.
+  let pivotIdx = pivot1(arr, left, right);
+  quickSort(arr, left, pivotIdx - 1); //left
+  quickSort(arr, pivotIdx + 1, right); //right
   return arr;
 }
 // 모든 과정이 새로운 배열이 만들지 않고 기존 배열에 대해 수행한다.
