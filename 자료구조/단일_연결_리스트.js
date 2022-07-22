@@ -55,6 +55,30 @@ class SinglyLinkedList {
     return current;
   }
 
+  /*
+  pop의 다른 방식 + (또는 get 메소드를 먼저 정의해서 prevNode를 찾는 방법이 있다.)
+  pop() {
+    if (this.length === 0) {
+      return undefined;
+    }
+    let targetNode = this.head;
+    let newTail = targetNode;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      while (targetNode.next) {
+        newTail = targetNode;
+        targetNode = targetNode.next;
+      }
+      newTail.next = null;
+      this.tail = newTail;
+    }
+    this.length--;
+    return targetNode;
+  }
+*/
+
   shift() {
     if (this.length === 0) {
       return undefined;
@@ -148,7 +172,7 @@ class SinglyLinkedList {
     let prevNode = this.get(index - 1);
     let targetNode = prevNode.next;
     prevNode.next = targetNode.next;
-    // targetNode = null;
+    targetNode.next = null;
     this.length--;
     return targetNode;
   }
@@ -157,8 +181,6 @@ class SinglyLinkedList {
     if (this.length <= 1) {
       return this;
     }
-    // a b c d
-    //
     let currentNode = this.head;
     this.head = this.tail;
     this.tail = currentNode;
@@ -175,6 +197,7 @@ class SinglyLinkedList {
   }
 
   print() {
+    //테스트용
     let arr = [];
     let current = this.head;
     while (current) {
@@ -188,8 +211,6 @@ class SinglyLinkedList {
 let list = new SinglyLinkedList();
 list.push("first");
 list.push("second");
-// console.log(list.insert(0, "idiot"));
-// console.log(list.insert(6, "wow"));
 
 list.print();
 console.log(list.reverse());
