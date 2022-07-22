@@ -51,6 +51,7 @@ class DoublyLinkedList {
 
     let oldHead = this.head;
     if (this.length === 1) {
+      //여기서 pop을 써도 되지 않나
       this.head = null;
       this.tail = null;
     } else {
@@ -65,6 +66,7 @@ class DoublyLinkedList {
   unshift(val) {
     let newNode = new Node(val);
     if (this.length === 0) {
+      //여기서 push를 써도 되지 않나
       this.head = newNode;
       this.tail = newNode;
     } else {
@@ -143,11 +145,11 @@ class DoublyLinkedList {
       return false;
     }
     if (index === 0) {
-      return !!this.shift();
+      return this.shift();
     }
 
     if (index === this.length - 1) {
-      return !!this.pop();
+      return this.pop();
     }
 
     let targetNode = this.get(index);
@@ -161,14 +163,41 @@ class DoublyLinkedList {
     this.length--;
     return targetNode;
   }
+
+  reverse() {
+    let temp = this.tail;
+    this.tail = this.head;
+    this.head = temp;
+    this.head.prev = null;
+    this.tail.next = null;
+
+    // tail 1 2 3 4 -> <- 5 head
+    let node = this.head.prev;
+    while (node) {
+      temp = node.next;
+      node.next = node.prev;
+      node.prev = temp;
+      node = node.prev;
+    }
+    return this;
+  }
+
+  print() {
+    //테스트용
+    let arr = [];
+    let node = this.head;
+    while (node) {
+      arr.push(node.val);
+      node = node.next;
+    }
+    console.log(arr);
+  }
 }
 
 let list = new DoublyLinkedList();
 list.push(13);
 list.push(15);
 list.push(17);
-console.log(list.remove(0));
-console.log(list.remove(0));
-console.log(list.remove(0));
-console.log(list);
-// console.log(list.get(1));
+list.print();
+list.reverse();
+list.print();
