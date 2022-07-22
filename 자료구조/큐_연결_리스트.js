@@ -56,3 +56,9 @@ class Queue {
     return targetNode.val;
   }
 }
+
+let queue = new Queue();
+console.log(queue.enqueue(1));
+console.log(queue.enqueue(2));
+console.log(queue.enqueue(3));
+console.log(queue.dequeue());
