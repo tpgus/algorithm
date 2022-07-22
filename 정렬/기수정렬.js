@@ -24,11 +24,11 @@ log10 = 3.xxxx이기 때문에
 */
 
 //정수의 자릿수를 반환하는 함수
-function getDigitCount(num) {
+function getLength(num) {
   if (num === 0) {
     return 0;
   }
-  return Math.floor(Math.log10(num)) + 1;
+  return Math.floor(Math.log10(Math.abs(num))) + 1;
 }
 
 //정수의 i번째의 자리의 값을 반환하는 함수
@@ -37,16 +37,16 @@ function getDigit(num, i) {
 }
 
 //정수 배열에서 가장 큰 자릿수를 반환하는 함수
-function getMostDigits(nums) {
+function getMaxLength(nums) {
   let maxDigit = 0;
   for (let i = 0; i < nums.length; i++) {
-    maxDigit = Math.max(maxDigit, getDigitCount(nums[i]));
+    maxDigit = Math.max(maxDigit, getLength(nums[i]));
   }
   return maxDigit;
 }
 
 function radixSort(arr) {
-  let maxDigits = getMostDigits(arr);
+  let maxDigits = getMaxLength(arr);
   for (let k = 0; k < maxDigits; k++) {
     let bucket = Array.from({ length: 10 }, () => []);
     for (let i = 0; i < arr.length; i++) {
@@ -60,3 +60,4 @@ function radixSort(arr) {
 }
 
 console.log(radixSort([123, 4322, 3, 5, 245, 12312]));
+console.log(radixSort([-10, -1, -20, -8]));
